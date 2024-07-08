@@ -8,8 +8,10 @@ class IncorrectCarNumbers(Exception):
 class Car():
     def __init__(self,model,vin,numbers):
         self.model = model
-        self.__vin__ = self.__is_valid_vin__(vin)
-        self.__numbers__ = self.__is_valid_numbers__(numbers)
+        if self.__is_valid_vin__(vin):
+            self.__vin__ = vin
+        if self.__is_valid_numbers__(numbers):
+            self.__numbers__ = numbers
     def __is_valid_vin__(self,vin_number):
         if isinstance(vin_number,int) and 1000000 <= vin_number <= 9999999:
             return True
@@ -36,6 +38,7 @@ except IncorrectCarNumbers as exc:
     print(exc.message)
 else:
     print(f'{first.model} успешно создан')
+    print(f"Модель : {third.model},VIN : {third.__vin__},Номер : {third.__numbers__}")
 
 try:
     second = Car('Model2', 300, 'т001тр')
@@ -45,30 +48,34 @@ except IncorrectCarNumbers as exc:
     print(exc.message)
 else:
     print(f'{second.model} успешно создан')
+    print(f"Модель : {third.model},VIN : {third.__vin__},Номер : {third.__numbers__}")
 
 try:
-    first = Car('Model3', 1000000, 'f123dj')
-except IncorrectVinNumber as exc:
-    print(exc.message)
-except IncorrectCarNumbers as exc:
-    print(exc.message)
-else:
-    print(f'{first.model} успешно создан')
-
-try:
-    second = Car('Model4', 3000000, 123456)
-except IncorrectVinNumber as exc:
-    print(exc.message)
-except IncorrectCarNumbers as exc:
-    print(exc.message)
-else:
-    print(f'{second.model} успешно создан')
-
-try:
-    third = Car('Model5', 2020202, 'нет номера')
+    third = Car('Model3', 1000000, 'f123dj')
 except IncorrectVinNumber as exc:
     print(exc.message)
 except IncorrectCarNumbers as exc:
     print(exc.message)
 else:
     print(f'{third.model} успешно создан')
+    print(f"Модель : {third.model},VIN : {third.__vin__},Номер : {third.__numbers__}")
+
+try:
+    fourth = Car('Model4', 3000000, 123456)
+except IncorrectVinNumber as exc:
+    print(exc.message)
+except IncorrectCarNumbers as exc:
+    print(exc.message)
+else:
+    print(f'{fourth.model} успешно создан')
+    print(f"Модель : {fourth.model},VIN : {fourth.__vin__},Номер : {fourth.__numbers__}")
+
+try:
+    fifth = Car('Model5', 2020202, 'нет номера')
+except IncorrectVinNumber as exc:
+    print(exc.message)
+except IncorrectCarNumbers as exc:
+    print(exc.message)
+else:
+    print(f'{fifth.model} успешно создан')
+    print(f"Модель : {fifth.model},VIN : {fifth.__vin__},Номер : {fifth.__numbers__}")
